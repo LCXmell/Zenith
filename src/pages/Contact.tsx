@@ -336,6 +336,11 @@ export default function Contact({ language, toggleLanguage }: ContactProps) {
                             address: "青岛市市南区香港中路 61 号甲远洋大厦 21 楼",
                             phone: "+86 532 8575 8888",
                             email: "qd@zenith.cn"
+                        }, {
+                            city: "武汉",
+                            address: "武汉市江汉区民生路20号世纪中心办公楼2210室",
+                            phone: "027-82823211",
+                            email: "wh@zenith.cn"
                         }].map((branch, index) => <motion.div
                             key={index}
                             className="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition"
