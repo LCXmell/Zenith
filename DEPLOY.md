@@ -69,6 +69,16 @@ npm run dev         # 开发服务器：http://localhost:3000/
 
 ### 操作步骤（以自有域名 `DOMAIN` 为例）
 
+> 现状记录：2026-11-12 已把 Pages 的自定义域名设为 `www.zenithlog.cn`（`https_enforced: true`，证书 approved），
+> 仓库变量 `PAGES_CUSTOM_DOMAIN=www.zenithlog.cn`，构建 base = `/`。
+> 线上：<https://www.zenithlog.cn/>；旧地址 `https://lcxmell.github.io/Zenith/` 301 跳转过去。
+> 若以后不再用自定义域名，把该变量删掉并重建即可回到 `/Zenith/` 模式。
+
+**顺序必须是“先 DNS → 再 Custom domain → 同时设变量 → 重建”，中间的窗口期新老地址都会短暂不可用。**
+最容易踩的坑：只改了 Custom domain 没设 `PAGES_CUSTOM_DOMAIN`，于是构建仍是 `/Zenith/` 前缀，
+资源请求变成 `https://DOMAIN/Zenith/assets/...` → 404 → 白屏。反过来（变量设了、域名没生效）则旧地址白屏。
+另外 Pages 分发约需 1-3 分钟，刚部署完可能仍返回旧 HTML，属正常。
+
 1. **DNS 记录**（域名托管在 Cloudflare 时，先点成灰色云 = DNS only，否则证书校验会失败/绕圈）
 
    | 类型 | 名称 | 值 |
