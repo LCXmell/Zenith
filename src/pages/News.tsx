@@ -9,6 +9,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import Layout from "../components/Layout";
+import { asset } from "@/lib/asset";
 
 interface NewsProps {
     language: "zh" | "en";
@@ -25,7 +26,7 @@ export default function News({ language, toggleLanguage }: NewsProps) {
       category: "industry",
       date: "2025-11-15",
       excerpt: "随着全球经济的复苏，海运市场呈现出新的发展趋势，我们的专家为您详细解读。",
-      imageUrl: "/images/external/image-13.jpg",
+      imageUrl: asset("/images/external/image-13.jpg"),
       views: 1254
     },
     {
@@ -34,7 +35,7 @@ export default function News({ language, toggleLanguage }: NewsProps) {
       category: "company",
       date: "2025-11-10",
       excerpt: "为了更好地服务客户，臻世国际物流新增了从中国到南美东的定期航线服务，提供更具竞争力的价格和更稳定的舱位保障。",
-      imageUrl: "/images/external/image-14.jpg",
+      imageUrl: asset("/images/external/image-14.jpg"),
       views: 987
     },
     {
@@ -43,7 +44,7 @@ export default function News({ language, toggleLanguage }: NewsProps) {
       category: "industry",
       date: "2025-11-05",
       excerpt: "2025年，国际物流行业将面临哪些挑战和机遇？本文为您详细分析。",
-      imageUrl: "/images/external/image-15.jpg",
+      imageUrl: asset("/images/external/image-15.jpg"),
       views: 1567
     },
     {
@@ -52,7 +53,7 @@ export default function News({ language, toggleLanguage }: NewsProps) {
       category: "company",
       date: "2025-10-28",
       excerpt: "在近日举行的国际物流行业峰会上，臻世国际物流凭借卓越的服务质量和专业的团队，荣获\"优秀物流企业\"称号。",
-      imageUrl: "/images/external/image-16.jpg",
+      imageUrl: asset("/images/external/image-16.jpg"),
       views: 876
     },
     {
@@ -61,7 +62,7 @@ export default function News({ language, toggleLanguage }: NewsProps) {
       category: "knowledge",
       date: "2025-10-20",
       excerpt: "在选择海运方式时，整箱和拼箱有什么区别？本文为您详细介绍，并提供选择指南。",
-      imageUrl: "/images/external/image-17.jpg",
+      imageUrl: asset("/images/external/image-17.jpg"),
       views: 2103
     },
     {
@@ -70,7 +71,7 @@ export default function News({ language, toggleLanguage }: NewsProps) {
       category: "company",
       date: "2025-10-15",
       excerpt: "为了提升服务效率和客户体验，臻世国际物流完成了数字化物流平台的全面升级，新增了多项功能。",
-      imageUrl: "/images/external/image-18.jpg",
+      imageUrl: asset("/images/external/image-18.jpg"),
       views: 765
     }
   ];
@@ -421,17 +422,17 @@ export default function News({ language, toggleLanguage }: NewsProps) {
               {
                 title: "2025年全球供应链发展趋势",
                 description: "随着全球化的深入和技术的发展，全球供应链正在发生深刻变革。本文为您分析2025年全球供应链的发展趋势。",
-                imageUrl: "/images/external/image-19.jpg"
+                imageUrl: asset("/images/external/image-19.jpg")
               },
               {
                 title: "数字化转型对物流行业的影响",
                 description: "数字化转型正在改变物流行业的运营模式和服务方式。本文探讨数字化转型对物流行业的深远影响。",
-                imageUrl: "/images/external/image-20.jpg"
+                imageUrl: asset("/images/external/image-20.jpg")
               },
               {
                 title: "可持续发展与绿色物流",
                 description: "可持续发展已成为全球共识，绿色物流是物流行业未来的发展方向。本文介绍绿色物流的实践和发展前景。",
-                imageUrl: "/images/external/image-21.jpg"
+                imageUrl: asset("/images/external/image-21.jpg")
               }
             ].map((insight, index) => (
               <motion.div

@@ -6,8 +6,12 @@
   "scripts": {
     "dev:client": "vite --host --port 3000",
     "dev": "pnpm dev:client",
+    "clean": "node scripts/clean.mjs",
     "build:client": "vite build --outDir dist/static",
-    "build": "rm -rf dist && pnpm build:client && cp package.json dist && touch dist/build.flag"
+    "build": "node scripts/clean.mjs && vite build --outDir dist/static && node scripts/postbuild.mjs",
+    "build:pages": "pnpm build",
+    "preview": "vite preview --outDir dist/static --port 4173",
+    "preview:pages": "node scripts/gh-pages-sim.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

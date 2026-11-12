@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { MapPin, Globe, ChevronRight, Search, Ship, Plane, ArrowRight } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import Layout from "../components/Layout";
+import { asset } from "@/lib/asset";
 
 interface RoutesProps {
     language: "zh" | "en";
@@ -23,7 +24,7 @@ export default function Routes({ language, toggleLanguage }: RoutesProps) {
                 ports: "桑托斯、里约热内卢、布宜诺斯艾利斯、蒙得维的亚",
                 frequency: "每周3-4班",
                 transitTime: "25-35天",
-                imageUrl: "/images/external/image-22.jpg"
+                imageUrl: asset("/images/external/image-22.jpg")
             },
 
             west: {
@@ -32,7 +33,7 @@ export default function Routes({ language, toggleLanguage }: RoutesProps) {
                 ports: "瓦尔帕莱索、圣安东尼奥、卡亚俄、瓜亚基尔",
                 frequency: "每周2-3班",
                 transitTime: "20-30天",
-                imageUrl: "/images/external/image-23.jpg"
+                imageUrl: asset("/images/external/image-23.jpg")
             },
 
             caribbean: {
@@ -41,7 +42,7 @@ export default function Routes({ language, toggleLanguage }: RoutesProps) {
                 ports: "科隆、哈瓦那、金斯敦、圣多明各",
                 frequency: "每周1-2班",
                 transitTime: "28-38天",
-                imageUrl: "/images/external/image-24.jpg"
+                imageUrl: asset("/images/external/image-24.jpg")
             }
         },
 
@@ -55,7 +56,7 @@ export default function Routes({ language, toggleLanguage }: RoutesProps) {
                 ports: "迪拜、杰贝阿里、达曼、多哈、科威特",
                 frequency: "每周4-5班",
                 transitTime: "15-25天",
-                imageUrl: "/images/external/image-25.jpg"
+                imageUrl: asset("/images/external/image-25.jpg")
             }
         },
 
@@ -69,7 +70,7 @@ export default function Routes({ language, toggleLanguage }: RoutesProps) {
                 ports: "洛杉矶、长滩、纽约、温哥华、曼萨尼约",
                 frequency: "每周5-7班",
                 transitTime: "12-30天",
-                imageUrl: "/images/external/image-26.jpg"
+                imageUrl: asset("/images/external/image-26.jpg")
             }
         },
 
@@ -83,7 +84,7 @@ export default function Routes({ language, toggleLanguage }: RoutesProps) {
                 ports: "东京、釜山、新加坡、巴生、胡志明市、悉尼",
                 frequency: "每周7-10班",
                 transitTime: "3-15天",
-                imageUrl: "/images/external/image-27.jpg"
+                imageUrl: asset("/images/external/image-27.jpg")
             }
         }
     };

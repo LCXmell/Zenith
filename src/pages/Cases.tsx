@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronRight, Star, Filter, Search } from "lucide-react";
 import Layout from "../components/Layout";
+import { asset } from "@/lib/asset";
 
 interface CasesProps {
     language: "zh" | "en";
@@ -17,7 +18,7 @@ export default function Cases({ language, toggleLanguage }: CasesProps) {
         category: "electronics",
         client: "某电子科技有限公司",
         description: "为客户提供从深圳到巴西桑托斯的电子产品海运服务，包括整箱运输、报关报检、目的港清关等一站式服务。",
-        imageUrl: "/images/external/image-2.jpg",
+        imageUrl: asset("/images/external/image-2.jpg"),
         year: "2024",
         region: "南美东",
         feedback: "臻世国际物流提供的服务非常专业，我们的货物总是能够准时到达，而且他们的团队随时都能提供详细的物流信息。"
@@ -27,7 +28,7 @@ export default function Cases({ language, toggleLanguage }: CasesProps) {
         category: "medical",
         client: "某医疗器械公司",
         description: "为客户提供从德国汉堡到上海的医疗器械进口服务，包括空运、报关报检、仓储配送等一站式服务。",
-        imageUrl: "/images/external/image-3.jpg",
+        imageUrl: asset("/images/external/image-3.jpg"),
         year: "2024",
         region: "欧洲",
         feedback: "臻世的报关团队非常专业，处理复杂的海关事务总是得心应手，为我们节省了大量时间和精力。"
@@ -37,7 +38,7 @@ export default function Cases({ language, toggleLanguage }: CasesProps) {
         category: "textile",
         client: "某服装贸易公司",
         description: "为客户提供从广州到美国洛杉矶的服装纺织品海运服务，包括拼箱运输、仓储分拣、目的港派送等服务。",
-        imageUrl: "/images/external/image-4.jpg",
+        imageUrl: asset("/images/external/image-4.jpg"),
         year: "2023",
         region: "北美",
         feedback: "臻世国际物流的服务非常贴心，能够根据我们的需求提供定制化的物流解决方案，帮助我们降低了物流成本。"
@@ -47,7 +48,7 @@ export default function Cases({ language, toggleLanguage }: CasesProps) {
         category: "automotive",
         client: "某汽车零部件制造商",
         description: "为客户提供从青岛到阿联酋迪拜的汽车零部件海运服务，包括整箱运输、保险、目的港清关等服务。",
-        imageUrl: "/images/external/image-5.jpg",
+        imageUrl: asset("/images/external/image-5.jpg"),
         year: "2023",
         region: "中东",
         feedback: "臻世国际物流的全球网络和专业知识帮助我们大幅降低了物流成本，提高了供应链效率。"
@@ -57,7 +58,7 @@ export default function Cases({ language, toggleLanguage }: CasesProps) {
         category: "food",
         client: "某食品贸易公司",
         description: "为客户提供从澳大利亚悉尼到上海的食品进口服务，包括海运、报关报检、冷链运输等一站式服务。",
-        imageUrl: "/images/external/image-6.jpg",
+        imageUrl: asset("/images/external/image-6.jpg"),
         year: "2023",
         region: "大洋洲",
         feedback: "臻世国际物流的冷链运输服务非常专业，确保了我们的食品在运输过程中的新鲜度和安全。"
@@ -67,7 +68,7 @@ export default function Cases({ language, toggleLanguage }: CasesProps) {
         category: "chemical",
         client: "某化工企业",
         description: "为客户提供从南京到新加坡的化工产品海运服务，包括危险品运输、报关报检、目的港清关等服务。",
-        imageUrl: "/images/external/image-7.jpg",
+        imageUrl: asset("/images/external/image-7.jpg"),
         year: "2022",
         region: "亚太",
         feedback: "臻世国际物流在危险品运输方面的专业知识和经验让我们非常放心，他们能够妥善处理各种复杂情况。"
@@ -219,15 +220,15 @@ export default function Cases({ language, toggleLanguage }: CasesProps) {
                         {[{
                             title: "电子产品行业",
                             description: "为电子产品提供安全、高效的物流解决方案，包括防震包装、保险服务、实时跟踪等。",
-                            imageUrl: "/images/external/image-8.jpg"
+                            imageUrl: asset("/images/external/image-8.jpg")
                         }, {
                             title: "医疗器械行业",
                             description: "为医疗器械提供专业的物流解决方案，包括温控运输、报关报检、资质审核等服务。",
-                            imageUrl: "/images/external/image-9.jpg"
+                            imageUrl: asset("/images/external/image-9.jpg")
                         }, {
                             title: "服装纺织行业",
                             description: "为服装纺织品提供灵活的物流解决方案，包括拼箱运输、仓储分拣、快速清关等服务。",
-                            imageUrl: "/images/external/image-10.jpg"
+                            imageUrl: asset("/images/external/image-10.jpg")
                         }].map((solution, index) => <motion.div
                             key={index}
                             className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300"

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Calendar, Tag, FileText, ArrowLeft } from "lucide-react";
 import Layout from "../components/Layout";
+import { asset } from "@/lib/asset";
 
 interface NewsDetailProps {
     language: "zh" | "en";
@@ -17,7 +18,7 @@ const newsData = [
     category: "industry",
     date: "2025-11-15",
     excerpt: "随着全球经济的复苏，海运市场呈现出新的发展趋势，我们的专家为您详细解读。",
-    imageUrl: "/images/external/image-13.jpg",
+    imageUrl: asset("/images/external/image-13.jpg"),
     views: 1254
   },
   {
@@ -26,7 +27,7 @@ const newsData = [
     category: "company",
     date: "2025-11-10",
     excerpt: "为了更好地服务客户，臻世国际物流新增了从中国到南美东的定期航线服务，提供更具竞争力的价格和更稳定的舱位保障。",
-    imageUrl: "/images/external/image-14.jpg",
+    imageUrl: asset("/images/external/image-14.jpg"),
     views: 987
   },
   {
@@ -35,7 +36,7 @@ const newsData = [
     category: "industry",
     date: "2025-11-05",
     excerpt: "2025年，国际物流行业将面临哪些挑战和机遇？本文为您详细分析。",
-    imageUrl: "/images/external/image-15.jpg",
+    imageUrl: asset("/images/external/image-15.jpg"),
     views: 1567
   },
   {
@@ -44,7 +45,7 @@ const newsData = [
     category: "company",
     date: "2025-10-28",
     excerpt: "在近日举行的国际物流行业峰会上，臻世国际物流凭借卓越的服务质量和专业的团队，荣获\"优秀物流企业\"称号。",
-    imageUrl: "/images/external/image-16.jpg",
+    imageUrl: asset("/images/external/image-16.jpg"),
     views: 876
   },
   {
@@ -53,7 +54,7 @@ const newsData = [
     category: "knowledge",
     date: "2025-10-20",
     excerpt: "在选择海运方式时，整箱和拼箱有什么区别？本文为您详细介绍，并提供选择指南。",
-    imageUrl: "/images/external/image-17.jpg",
+    imageUrl: asset("/images/external/image-17.jpg"),
     views: 2103
   },
   {
@@ -62,7 +63,7 @@ const newsData = [
     category: "company",
     date: "2025-10-15",
     excerpt: "为了提升服务效率和客户体验，臻世国际物流完成了数字化物流平台的全面升级，新增了多项功能。",
-    imageUrl: "/images/external/image-18.jpg",
+    imageUrl: asset("/images/external/image-18.jpg"),
     views: 765
   }
 ];
@@ -128,10 +129,10 @@ export default function NewsDetail({ language, toggleLanguage }: NewsDetailProps
           <div className="max-w-7xl mx-auto text-center">
             <h1 className="text-3xl font-bold text-gray-800 mb-4">新闻不存在</h1>
             <p className="text-xl text-gray-600 mb-8">您访问的新闻可能已被删除或不存在</p>
-            <a href="/news" className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+            <Link to="/news" className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
               <ArrowLeft className="h-4 w-4 mr-2" />
               返回新闻列表
-            </a>
+            </Link>
           </div>
         </section>
       </Layout>
@@ -182,7 +183,7 @@ export default function NewsDetail({ language, toggleLanguage }: NewsDetailProps
 
           {/* 返回按钮 */}
           <motion.a
-            href="/news"
+            href={asset("/news")}
             className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

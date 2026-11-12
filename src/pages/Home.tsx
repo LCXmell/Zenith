@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 
 import Layout from "../components/Layout";
+import { asset } from "@/lib/asset";
 
 interface HomeProps {
     language: "zh" | "en";
@@ -145,7 +146,7 @@ export default function Home({ language, toggleLanguage }: HomeProps) {
                             delay: 0.3
                         }}>
                         <img
-                            src="/images/external/image-11.jpg"
+                            src={asset("/images/external/image-11.jpg")}
                             alt="国际海运"
                             className="rounded-lg shadow-2xl w-full object-cover h-80" />
                     </motion.div>
@@ -191,7 +192,7 @@ export default function Home({ language, toggleLanguage }: HomeProps) {
                                 once: true
                             }}>
                             <img
-                                src="/images/external/image-1.jpg"
+                                src={asset("/images/external/image-1.jpg")}
                                 alt="公司办公环境"
                                 className="rounded-lg shadow-xl w-full h-auto" />
                         </motion.div>
@@ -494,7 +495,7 @@ export default function Home({ language, toggleLanguage }: HomeProps) {
                                 once: true
                             }}>
                             <img
-                                src={`/images/external/image-12.jpg`}
+                                src={asset("/images/external/image-12.jpg")}
                                 alt={`新闻图片 ${item}`}
                                 className="w-full h-48 object-cover" />
                             <div className="p-6">

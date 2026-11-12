@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { Globe, MapPin, Phone, Mail } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { asset } from "@/lib/asset";
 
 interface LayoutProps {
     children: ReactNode;
@@ -86,7 +87,7 @@ export default function Layout(
     ) => {
         return (
             <img
-                src="/images/logo.png"
+                src={asset("/images/logo.png")}
                 alt="公司LOGO"
                 className={`h-20 w-20 ${className}`}
                 style={{

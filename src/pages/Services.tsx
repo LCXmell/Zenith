@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 
 import Layout from "../components/Layout";
+import { asset } from "@/lib/asset";
 
 interface ServicesProps {
     language: "zh" | "en";
@@ -29,37 +30,37 @@ export default function Services({ language, toggleLanguage }: ServicesProps) {
         icon: <Ship className="h-10 w-10 text-blue-600" />,
         description: "全球主要航线的整箱和拼箱服务，提供灵活的运输方案和具有竞争力的价格。",
         features: ["全球主要港口覆盖", "优势运价协议", "灵活的箱型选择", "专业的货物跟踪"],
-        imageUrl: "/images/external/image-28.jpg"
+        imageUrl: asset("/images/external/image-28.jpg")
     }, {
         title: "空运服务",
         icon: <Plane className="h-10 w-10 text-blue-600" />,
         description: "全球空运网络，提供快速、安全的航空货运服务，满足紧急货物运输需求。",
         features: ["全球主要机场覆盖", "加急货物处理", "门到门服务", "实时货物跟踪"],
-        imageUrl: "/images/external/image-29.jpg"
+        imageUrl: asset("/images/external/image-29.jpg")
     }, {
         title: "陆运配送",
         icon: <Truck className="h-10 w-10 text-blue-600" />,
         description: "完善的陆地运输网络，提供门到门配送服务，确保货物安全准时送达。",
         features: ["全国公路运输网络", "专业的车队管理", "货物保险服务", "实时配送跟踪"],
-        imageUrl: "/images/external/image-30.jpg"
+        imageUrl: asset("/images/external/image-30.jpg")
     }, {
         title: "仓储服务",
         icon: <Warehouse className="h-10 w-10 text-blue-600" />,
         description: "现代化仓库设施，提供货物存储、分拣、包装等一站式仓储解决方案。",
         features: ["现代化仓库设施", "专业的仓储管理系统", "货物分拣包装", "库存管理服务"],
-        imageUrl: "/images/external/image-31.jpg"
+        imageUrl: asset("/images/external/image-31.jpg")
     }, {
         title: "报关报检",
         icon: <FileText className="h-10 w-10 text-blue-600" />,
         description: "专业的报关报检团队，熟悉各类货物的通关流程，确保快速高效清关。",
         features: ["专业的报关团队", "熟悉各类货物通关流程", "快速高效清关", "海关政策咨询"],
-        imageUrl: "/images/external/image-32.jpg"
+        imageUrl: asset("/images/external/image-32.jpg")
     }, {
         title: "全球供应链管理",
         icon: <Globe className="h-10 w-10 text-blue-600" />,
         description: "定制化的供应链解决方案，优化物流流程，降低成本，提高效率。",
         features: ["定制化供应链解决方案", "物流流程优化", "成本控制管理", "供应链可视化"],
-        imageUrl: "/images/external/image-33.jpg"
+        imageUrl: asset("/images/external/image-33.jpg")
     }];
 
     const serviceProcess = [{

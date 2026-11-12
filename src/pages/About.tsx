@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Globe, FileText, Star, ChevronRight, Award, Users, Building, Target } from "lucide-react";
 import Layout from "../components/Layout";
+import { asset } from "@/lib/asset";
 
 interface AboutProps {
     language: "zh" | "en";
@@ -93,7 +94,7 @@ export default function About({ language, toggleLanguage }: AboutProps) {
                                 once: true
                             }}>
                             <img
-                                src="/images/external/image-1.jpg"
+                                src={asset("/images/external/image-1.jpg")}
                                 alt="公司办公环境"
                                 className="rounded-lg shadow-xl w-full h-auto" />
                         </motion.div>
