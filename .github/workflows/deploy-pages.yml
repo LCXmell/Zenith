@@ -4,6 +4,11 @@ on:
   push:
     branches: [master, main]
   workflow_dispatch:
+    inputs:
+      base:
+        description: "构建 base（默认 /Zenith/；配了自定义域名/用户站点时填 /）"
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -21,6 +26,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # base 解析优先级：
+      #   1) 手动触发时手填的 base（最高）
+      #   2) 仓库变量 PAGES_CUSTOM_DOMAIN 非空，或仓库里存在 public/CNAME  -> 站点在域名根目录，base = /
+      #   3) 否则是项目站点 https://<user>.github.io/<repo>/              -> base = /Zenith/
+      - name: Resolve base path
+        id: base
+        env:
+          INPUT_BASE: ${{ github.event.inputs.base }}
+          CUSTOM_DOMAIN: ${{ vars.PAGES_CUSTOM_DOMAIN }}
+        run: |
+          if [ -n "$INPUT_BASE" ]; then
+            base="$INPUT_BASE"
+          elif [ -n "$CUSTOM_DOMAIN" ] || [ -f public/CNAME ]; then
+            base="/"
+          else
+            base="/Zenith/"
+          fi
+          echo "base=$base" >> "$GITHUB_OUTPUT"
+          echo "resolved base: $base"
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -34,13 +59,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Build (base = /Zenith/)
+      - name: Build
         run: pnpm build:pages
+        env:
+          PUBLIC_BASE: ${{ steps.base.outputs.base }}
 
       - name: Verify build output
         run: |
           ls -la dist/static
-          grep -o '/Zenith/assets/[^"]*' dist/static/index.html
+          grep -o 'src="[^"]*assets/[^"]*"' dist/static/index.html
+          grep -o 'href="[^"]*images/logo.png"' dist/static/index.html || true
           test -f dist/static/404.html
 
       - name: Setup Pages

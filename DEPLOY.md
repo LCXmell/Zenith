@@ -47,15 +47,72 @@ npm run preview:pages   # 模拟 GitHub Pages：http://localhost:4180/Zenith/
 npm run dev         # 开发服务器：http://localhost:3000/
 ```
 
-## 五、以后换自定义域名（根路径部署）
+## 五、自定义域名（把站点从 /Zenith/ 搬到域名根目录）
 
-在仓库根目录执行构建时把 `PUBLIC_BASE` 设为 `/`，或在 workflow 里给 Build 步骤加环境变量：
+### 关键概念
 
-```yaml
-- name: Build
-  run: pnpm build:pages
-  env:
-    PUBLIC_BASE: /
+项目站点 `https://lcxmell.github.io/Zenith/` 之所以带 `/Zenith/` 前缀，是因为**“仓库名”就是路径**。
+一旦给这个仓库的 Pages 配上自定义域名（例如 `www.zenith-logistics.com`），GitHub 会把这个站点的根变成
+`https://www.zenith-logistics.com/`，**`/Zenith/` 前缀随即消失**，旧地址 301 跳转到新域名根。
+
+所以配自定义域名时，构建 base 必须从 `/Zenith/` 改成 `/`，否则 JS/CSS 会去请求
+`https://www.zenith-logistics.com/Zenith/assets/...` 而 404，页面继续白屏。
+
+本仓库已经做了**自动判断**（`.github/workflows/deploy-pages.yml` 的 `Resolve base path` 步骤）：
+
+| 条件 | base | 站点根 |
+| --- | --- | --- |
+| 仓库变量 `PAGES_CUSTOM_DOMAIN` 非空 | `/` | 自定义域名根 |
+| 仓库里存在 `public/CNAME` | `/` | 自定义域名根 |
+| 两者都没有（当前状态） | `/Zenith/` | `https://lcxmell.github.io/Zenith/` |
+| 手动 Run workflow 时填 `base` | 用填的值 | 按需 |
+
+### 操作步骤（以自有域名 `DOMAIN` 为例）
+
+1. **DNS 记录**（域名托管在 Cloudflare 时，先点成灰色云 = DNS only，否则证书校验会失败/绕圈）
+
+   | 类型 | 名称 | 值 |
+   | --- | --- | --- |
+   | A | `@` | `185.199.108.153` |
+   | A | `@` | `185.199.109.153` |
+   | A | `@` | `185.199.110.153` |
+   | A | `@` | `185.199.111.153` |
+   | AAAA | `@` | `2606:50c0:8000::153` |
+   | AAAA | `@` | `2606:50c0:8001::153` |
+   | AAAA | `@` | `2606:50c0:8002::153` |
+   | AAAA | `@` | `2606:50c0:8003::153` |
+   | CNAME | `www` | `lcxmell.github.io` |
+
+   只要 `www.DOMAIN` 也行：那就只加那条 CNAME。
+
+2. **仓库 Settings → Pages → Custom domain** 填 `DOMAIN`（或 `www.DOMAIN`）→ Save。
+   这一步会做 DNS 检查，通过后勾选 **Enforce HTTPS**（证书签发可能要等几分钟到 1 小时）。
+3. **告诉构建“现在是根路径部署”**，二选一：
+   - 仓库 Settings → Secrets and variables → Actions → **Variables** → New variable：
+     名字 `PAGES_CUSTOM_DOMAIN`，值 `DOMAIN`（推荐，不改代码）；
+   - 或者在仓库里加文件 `public/CNAME`，内容一行：`DOMAIN`。
+4. **Actions → Deploy to GitHub Pages → Run workflow**（或随便 push 一次）重新构建。
+   日志里会打印 `resolved base: /`，`Verify build output` 里的 `src="..."` 应该不带 `/Zenith/`。
+
+也可以用 API 一次搞定（把 `DOMAIN` 换成真实域名）：
+
+```bash
+curl -X PUT -H "Authorization: Bearer $TOKEN" \
+     -H "Accept: application/vnd.github+json" \
+     https://api.github.com/repos/LCXmell/Zenith/pages \
+     -d '{"build_type":"workflow","cname":"DOMAIN","https_enforced":true}'
 ```
 
-同时记得在 Pages 里配置 Custom domain，代码不需要再改。
+### 另一种“https://lcxmell.github.io”根地址（一般不要选）
+
+网上说的“改成 `https://lcxmell.github.io` 才能用”，指的是**用户站点**：把仓库**改名**为
+`LCXmell.github.io`，它的 Pages 就发布在 `https://lcxmell.github.io/` 根目录，base 用 `/`。
+代价：仓库名变、`/Zenith/` 这个地址直接失效、而且一个账号只能有一个这样的仓库（会顶掉其它站点的默认域名）。
+有自有域名的话不需要走这一步。
+
+### 排查清单
+
+- 页面白屏 → 打开 DevTools，看 `assets/...js` 的请求是不是带了域名根路径；带 `/Zenith/` 说明 base 没切过来。
+- Custom domain 报 `DNS check unsuccessful` → 记录还没生效（等 10 分钟）或 Cloudflare 还开着橙色云。
+- 证书一直 pending → 先把域名从 Pages 里删掉、清 `public/CNAME`、重加一次。
+- 换域名后 `/Zenith/news/xxx` 老链接 → 301 到 `https://DOMAIN/news/xxx`，靠 `404.html` 回退仍能打开。
